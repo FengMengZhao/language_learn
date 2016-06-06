@@ -12,6 +12,7 @@ git add . | adddate >> /home/fmz/git_auto.log
 git commit -m"auto push" | adddate >> /home/fmz/git_auto.log
 git push origin master | adddate >> /home/fmz/git_auto.log
 
+rsync -azv /home/fmz/language_learn/ /home/fmz/git_repo/language_learn/
 cd /home/fmz/git_repo/language_learn/
 git add . | adddate >> /home/fmz/git_auto.log
 git commit -m"auto push" | adddate >> /home/fmz/git_auto.log
