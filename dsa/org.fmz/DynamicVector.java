@@ -3,6 +3,10 @@ package org.fmz.container;
 
 public class DynamicVector extends Vector {
 
+    public DynamicVector(){
+        // auto subclass constructor public Vector(){}
+        //super() ;
+    }
 
 	/**
 	 * 

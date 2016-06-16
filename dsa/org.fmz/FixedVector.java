@@ -4,6 +4,9 @@ package org.fmz.container;
 public class FixedVector extends Vector {
 
 
+    public FixedVector(){
+
+    }
 
 	/**
 	 * 

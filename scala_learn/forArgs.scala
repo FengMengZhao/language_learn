@@ -1,5 +1,5 @@
 for(arg <- args)
-  println(arg + "!")
+  println(arg + "!"
 
 /*
 for(arg <- args){

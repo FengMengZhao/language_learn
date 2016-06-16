@@ -15,5 +15,7 @@ public class TestDynamicVector{
         System.out.println("element at index of 11= "+dv.elementAt(11)) ;
         System.out.println("capacity= "+dv.capacity()) ;
         System.out.println("DEFAULT_CAPACITY= "+dv.DEFAULT_CAPACITY) ;
+        DynamicVector dv2 = new DynamicVector() ;
+        System.out.println(dv2.capacity()) ;
     }
 }
