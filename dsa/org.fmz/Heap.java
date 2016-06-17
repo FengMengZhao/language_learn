@@ -7,12 +7,9 @@ public abstract class Heap extends ArrayContainer {
 
 
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	public Heap(){
-
+        data = new Comparable[DEFAULT_CAPACITY] ;
 	}
 
 	/**
@@ -20,19 +17,31 @@ public abstract class Heap extends ArrayContainer {
 	 * @param initCapacity
 	 */
 	public Heap(int initCapacity){
-
+        if(initCapacity <= 0)
+            data = new Comparable[DEFAULT_CAPACITY] ;
+        else
+            data = new Comparable[initCapacity] ;
 	}
 
+    
 	public int capacity(){
-		return 0;
+		return data.length ;
 	}
+    
 
 	public void clear(){
-
+        for(int i=0; i<numItems; i++)
+            data[i] = null ;
+        numItems = 0 ;
 	}
 
 	public void contract(){
-
+        if(data.length == numItems)
+            return ;
+        Comparable[] new_data = new Comparable[numItems] ;
+        for(int i=0; i<numItems; i++)
+            new_data[i] = data[i] ;
+        data = new_data ;
 	}
 
 	/**
@@ -40,7 +49,14 @@ public abstract class Heap extends ArrayContainer {
 	 * @param element
 	 */
 	public void insert(Comparable element){
-
+        if(isFull()){
+            Comparable[] new_data = new Comparable[data.length << 1] ;
+            for(int i=0; i<numItems; i++)
+                new_data[i] = data[i] ;
+            data = new_data ;
+        }
+        data[numItems++] = element ;
+        percolate() ; // This is a abstract method
 	}
 
 	/**
@@ -48,7 +64,7 @@ public abstract class Heap extends ArrayContainer {
 	 * @param pos
 	 */
 	protected boolean isLeaf(int pos){
-		return false;
+		return (pos << 1) + 1 >= numItems ;
 	}
 
 	/**
@@ -56,7 +72,9 @@ public abstract class Heap extends ArrayContainer {
 	 * @param pos
 	 */
 	protected int leftChild(int pos){
-		return 0;
+        if(pos < 0)
+            return -1 ;
+		return (pos << 1) + 1 ;
 	}
 
 	/**
@@ -64,17 +82,34 @@ public abstract class Heap extends ArrayContainer {
 	 * @param pos
 	 */
 	protected int parent(int pos){
-		return 0;
+        if(pos < 1)
+		    return -1 ;
+        return (pos -1) >> 1 ;
 	}
 
+    // The data at the top of the heap has been returned
 	protected Comparable peek(){
-		return null;
+        if(isEmpty())
+            return null ;
+		return data[0] ;
 	}
 
+    /*
+     * This method is a helper for insert()
+     * This method varies between the MinHeap and MapHeap
+     */
 	protected abstract void percolate();
 
+    // The data at the top of the heap has been removed and returned
 	protected Comparable remove(){
-		return null;
+        if(isEmpty())
+            return null ;
+        swap(data, 0, size()-1) ;
+        Comparable root = data[size()-1] ;
+        data[--numItems] = null ;
+        if(size() != 0)
+            sift() ;// This is a abstract method
+		return root ;
 	}
 
 	/**
@@ -82,14 +117,17 @@ public abstract class Heap extends ArrayContainer {
 	 * @param pos
 	 */
 	protected int rightChild(int pos){
-		return 0;
+        if(pos <0)
+            return -1 ;
+		return (pos << 1) + 2 ;
 	}
 
+    /*
+     * This method is a helper for remove()
+     * This method varies between MinHeap and MaxHeap
+     */
 	protected abstract void sift();
 
-	public int size(){
-		return 0;
-	}
 
 	/**
 	 * 
@@ -98,7 +136,9 @@ public abstract class Heap extends ArrayContainer {
 	 * @param second
 	 */
 	protected void swap(Comparable[] arr, int first, int second){
-
+        Comparable temp = arr[first] ;
+        arr[first] = arr[second] ;
+        arr[second] = temp ;
 	}
 
 }
