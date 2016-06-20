@@ -3,25 +3,17 @@ package org.fmz.container;
 
 public abstract class LinearLinkedContainer extends LinkedContainer {
 
-	public class SLNode extends Node {
+	public static class SLNode extends Node {
 
-		public Object data;
 		public SLNode next;
 
-		public SLNode(){
-
-		}
-
-		public void finalize() throws Throwable {
-			super.finalize();
-		}
 
 		/**
 		 * 
 		 * @param dat
 		 */
 		public SLNode(Object dat){
-
+            super(dat) ;
 		}
 
 		/**
@@ -30,23 +22,16 @@ public abstract class LinearLinkedContainer extends LinkedContainer {
 		 * @param nxt
 		 */
 		public SLNode(Object dat, SLNode nxt){
-
+            super(dat) ;
+            next = nxt ;
 		}
 
 	}
 
 	protected SLNode head;
 
-	public LinearLinkedContainer(){
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	public void clear(){
-
+        head = null ;
 	}
 
 }

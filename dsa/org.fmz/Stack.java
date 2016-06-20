@@ -3,16 +3,14 @@ package org.fmz.container;
 
 public class Stack extends LinearLinkedContainer {
 
-	public Stack(){
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	public Object pop(){
-		return null;
+        if(isEmpty())
+            return null ;
+        Object element = head.data ;
+        head = head.next ;
+        numItems -- ;
+		return element;
 	}
 
 	/**
@@ -20,11 +18,17 @@ public class Stack extends LinearLinkedContainer {
 	 * @param element
 	 */
 	public void push(Object element){
-
+        if(isEmpty())
+            head = new SLNode(element) ;
+        else
+            head = new SLNode(element, head) ;
+        numItems ++ ; 
 	}
 
 	public Object top(){
-		return null;
+        if(isEmpty())
+            return null ;
+		return head.data ;
 	}
 
 }
