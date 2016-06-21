@@ -3,22 +3,15 @@ package org.fmz.container;
 
 public class BinarySearchTree extends BinaryTree {
 
-	public class BSTNode extends BinaryTreeNode {
+	public static class BSTNode extends BinaryTreeNode implements Comparable{
 
-		public BSTNode(){
-
-		}
-
-		public void finalize() throws Throwable {
-			super.finalize();
-		}
 
 		/**
 		 * 
 		 * @param dat
 		 */
 		public BSTNode(Comparable dat){
-
+            super(dat) ;
 		}
 
 		/**
@@ -29,7 +22,7 @@ public class BinarySearchTree extends BinaryTree {
 		 * @param par
 		 */
 		public BSTNode(Comparable dat, BSTNode lc, BSTNode rc, BSTNode par){
-
+            super(dat, lc, rc, par) ;
 		}
 
 		/**
@@ -37,25 +30,22 @@ public class BinarySearchTree extends BinaryTree {
 		 * @param o
 		 */
 		public int compareTo(Object o){
-			return 0;
+		    Comparable c = (Comparable)((BSTNode)o).data;
+            return ((Comparable)data).compareTo(c) ;
 		}
 
 	}
 
-	public BinarySearchTree(){
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	/**
 	 * 
 	 * @param target
 	 */
 	public Comparable find(BSTNode target){
-		return null;
+        BSTNode rs = findHelper((BSTNode)root, target) ;
+        if(rs == null)
+		    return null;
+        return (Comparable)rs.data ;
 	}
 
 	/**
@@ -64,7 +54,13 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param target
 	 */
 	protected BSTNode findHelper(BSTNode current, BSTNode target){
-		return null;
+        if(current == null)
+		    return null;
+        if(target.compareTo(current) < 0)
+            findHelper((BSTNode)current.leftChild, target) ;
+        if(target.compareTo(current) > 0)
+            findHelper((BSTNode)current.rightChild, target) ;
+        return current ;
 	}
 
 	/**
@@ -72,7 +68,7 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param newItem
 	 */
 	public void insert(Comparable newItem){
-
+        root = insertHelper((BSTNode)root, new BSTNode(newItem)) ;
 	}
 
 	/**
@@ -81,7 +77,18 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param newNode
 	 */
 	protected BSTNode insertHelper(BSTNode current, BSTNode newNode){
-		return null;
+        if(current == null){
+            numItems ++ ;
+            return newNode ;
+        }
+        if(newNode.compareTo(current) < 0){
+            current.leftChild = insertHelper((BSTNode)current.leftChild, newNode) ;
+            current.leftChild.parent = current ;
+        }else{
+            current.rightChild = insertHelper((BSTNode)current.rightChild, newNode) ;
+            current.rightChild.parent = current ;
+        }
+		return current ;
 	}
 
 	/**
@@ -89,11 +96,18 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param current
 	 */
 	protected BSTNode maxHelper(BSTNode current){
-		return null;
+        if(current == null)
+            return null ;
+        while(current.rightChild != null)
+            current = (BSTNode)current.rightChild ;
+		return current ;
 	}
 
 	public Comparable maximum(){
-		return null;
+        BSTNode max = maxHelper((BSTNode)root) ;
+        if(max == null)
+		    return null;
+        return (Comparable)max.data ;
 	}
 
 	/**
@@ -101,11 +115,18 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param current
 	 */
 	protected BSTNode minHelper(BSTNode current){
-		return null;
+        if(current == null)
+		    return null;
+        while(current.leftChild != null)
+            current = (BSTNode)current.leftChild ;
+        return current ;
 	}
 
 	public Comparable minimum(){
-		return null;
+        BSTNode min = minHelper((BSTNode)root) ;
+        if(min == null)
+		    return null;
+        return (Comparable)min.data ;
 	}
 
 	/**
@@ -113,7 +134,17 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param target
 	 */
 	public Comparable predecessor(Comparable target){
-		return null;
+        BSTNode found = findHelper((BSTNode)root, new BSTNode(target)) ;
+        if(found == null)
+            return null ;
+        if(found.leftChild != null)
+            return (Comparable)maxHelper((BSTNode)found.leftChild).data ;
+        BSTNode parent = (BSTNode)found.parent ;
+        while(parent != null && parent.compareTo(found) > 0)
+            parent = (BSTNode)parent.parent ;
+        if(parent == null)
+            return null ;
+		return (Comparable)parent.data ;
 	}
 
 	/**
@@ -121,7 +152,7 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param target
 	 */
 	public void remove(Comparable target){
-
+        removeHelper((BSTNode)root, new BSTNode(target)) ;
 	}
 
 	/**
@@ -130,7 +161,58 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param target
 	 */
 	protected BSTNode removeHelper(BSTNode current, BSTNode target){
-		return null;
+        if(current == null)
+            return null ;
+        if(target.compareTo(current) < 0)
+            current.leftChild = removeHelper((BSTNode)current.leftChild, target) ;
+        else if(target.compareTo(current) > 0)
+            current.rightChild = removeHelper((BSTNode)current.rightChild, target) ;
+        else{
+            if(current.isLeaf()){
+                numItems -- ;
+                return null ;
+            }
+            BSTNode temp ;
+            if(current.leftChild == null){
+                temp = (BSTNode)current.rightChild ;
+                current.data = temp.data ;
+                current.leftChild = temp.leftChild ;
+                if(current.leftChild != null)
+                    current.leftChild.parent = current ;
+                current.rightChild = temp.rightChild ;
+                if(current.rightChild != null)
+                    current.rightChild.parent = current ;
+            }
+            if(current.rightChild == null){
+                temp = (BSTNode)current.leftChild ;
+                current.data = temp.data ;
+                current.leftChild = temp.leftChild ;
+                if(current.leftChild != null)
+                    current.leftChild.parent = current ;
+                current.rightChild = temp.rightChild ;
+                if(current.rightChild != null)
+                    current.rightChild.parent = current ;
+            }else{
+                temp = (BSTNode)current.rightChild ;
+                if(temp.isLeaf()){
+                    current.data = temp.data ;
+                    current.rightChild = null ;
+                }else if(temp.leftChild == null){
+                    current.data = temp.data ;
+                    current.rightChild = temp.rightChild ;
+                    if(current.rightChild != null)
+                        current.rightChild.parent = current ;
+                }else{
+                    while(temp.leftChild.leftChild != null)
+                        temp = (BSTNode)temp.leftChild ;
+                    current.data = temp.leftChild.data ;
+                    removeHelper((BSTNode)temp, new BSTNode((Comparable)temp.leftChild.data)) ;
+                    numItems ++ ;
+                }
+            }
+            numItems -- ;
+        }
+		return current ;
 	}
 
 	/**
@@ -138,7 +220,17 @@ public class BinarySearchTree extends BinaryTree {
 	 * @param target
 	 */
 	public Comparable successor(Comparable target){
-		return null;
+        BSTNode found = findHelper((BSTNode)root, new BSTNode(target)) ;
+        if(found == null)
+            return null ;
+        if(found.rightChild != null)
+            return (Comparable)minHelper((BSTNode)found.rightChild).data ;
+        BSTNode parent = (BSTNode)found.parent ;
+        while(parent != null && parent.compareTo(found) <= 0)
+            parent = (BSTNode)parent.parent ;
+        if(parent == null)
+            return null ;
+		return (Comparable)parent.data ;
 	}
 
 }

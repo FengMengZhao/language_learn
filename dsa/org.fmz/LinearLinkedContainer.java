@@ -3,7 +3,7 @@ package org.fmz.container;
 
 public abstract class LinearLinkedContainer extends LinkedContainer {
 
-	public static class SLNode extends Node {
+	protected static class SLNode extends Node {
 
 		public SLNode next;
 

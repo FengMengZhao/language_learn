@@ -3,19 +3,12 @@ package org.fmz.container;
 
 public abstract class BinaryTree extends TreeContainer {
 
-	public abstract class BinaryTreeNode extends Node {
+	public static abstract class BinaryTreeNode extends Node {
 
 		public BinaryTreeNode leftChild;
 		public BinaryTreeNode parent;
 		public BinaryTreeNode rightChild;
 
-		public BinaryTreeNode(){
-
-		}
-
-		public void finalize() throws Throwable {
-			super.finalize();
-		}
 
 		/**
 		 * 
@@ -25,6 +18,10 @@ public abstract class BinaryTree extends TreeContainer {
 		 * @param par
 		 */
 		public BinaryTreeNode(Object dat, BinaryTreeNode lc, BinaryTreeNode rc, BinaryTreeNode par){
+            super(dat) ;
+            leftChild = lc ;
+            rightChild = rc ;
+            parent = par ;
 
 		}
 
@@ -33,11 +30,11 @@ public abstract class BinaryTree extends TreeContainer {
 		 * @param dat
 		 */
 		public BinaryTreeNode(Object dat){
-
+            super(dat) ;
 		}
 
 		public boolean isLeaf(){
-			return false;
+			return leftChild == null && rightChild == null ;
 		}
 
 	}
@@ -52,16 +49,9 @@ public abstract class BinaryTree extends TreeContainer {
 
 	}
 
-	public BinaryTree(){
-
-	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	public int height(){
-		return 0;
+		return heightHelper((BinaryTreeNode)root, -1) ;
 	}
 
 	/**
@@ -70,7 +60,10 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param ht
 	 */
 	protected int heightHelper(BinaryTreeNode current, int ht){
-		return 0;
+        if(current == null)
+            return ht ;
+		return Math.max(heightHelper(current.leftChild, ht+1),
+                        heightHelper(current.rightChild, ht+1)) ;
 	}
 
 	/**
@@ -79,7 +72,11 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param processor
 	 */
 	protected void inorder(BinaryTreeNode node, NodeProcessor processor){
-
+        if(node != null){
+            inorder(node.leftChild, processor) ;
+            processor.processNode(node) ;
+            inorder(node.rightChild, processor) ;
+        }
 	}
 
 	/**
@@ -87,7 +84,7 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param processor
 	 */
 	public void inorderTraverse(NodeProcessor processor){
-
+        inorder((BinaryTreeNode)root, processor) ;
 	}
 
 	/**
@@ -96,7 +93,11 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param processor
 	 */
 	protected void postorder(BinaryTreeNode node, NodeProcessor processor){
-
+        if(node != null){
+            postorder(node.leftChild, processor) ;
+            postorder(node.rightChild, processor) ;
+            processor.processNode(node) ;
+        }        
 	}
 
 	/**
@@ -104,7 +105,7 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param processor
 	 */
 	public void postorderTraverse(NodeProcessor processor){
-
+        postorder((BinaryTreeNode)root, processor) ;
 	}
 
 	/**
@@ -113,7 +114,11 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param processor
 	 */
 	protected void preorder(BinaryTreeNode node, NodeProcessor processor){
-
+        if(node != null){
+            processor.processNode(node) ;
+            preorder(node.leftChild, processor) ;
+            preorder(node.rightChild, processor) ;
+        }
 	}
 
 	/**
@@ -121,8 +126,8 @@ public abstract class BinaryTree extends TreeContainer {
 	 * @param node
 	 * @param processor
 	 */
-	public void preorderTraverse(BinaryTreeNode node, NodeProcessor processor){
-
+	public void preorderTraverse(NodeProcessor processor){
+        preorder((BinaryTreeNode)root, processor) ;
 	}
 
 }
