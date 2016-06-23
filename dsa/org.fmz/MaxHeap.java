@@ -4,7 +4,7 @@ package org.fmz.container;
 public class MaxHeap extends Heap {
 
 
-	protected MaxHeap(){
+	public MaxHeap(){
 
 	}
 
@@ -12,7 +12,7 @@ public class MaxHeap extends Heap {
 	 * 
 	 * @param initCapacity
 	 */
-	protected MaxHeap(int initCapacity){
+	public MaxHeap(int initCapacity){
         super(initCapacity) ;
 	}
 
