@@ -7,8 +7,6 @@ public abstract class ArrayContainer extends Container {
 	protected static final int DEFAULT_CAPACITY = 100;
 
 
-
-
 	public ArrayContainer(){
         data = new Object[DEFAULT_CAPACITY] ;
 	}
@@ -20,6 +18,7 @@ public abstract class ArrayContainer extends Container {
 	public void clear(){
         for(int i=0; i<numItems; i++)
             data[i] = null ;
+        numItems = 0;
 	}
 
 	public boolean isFull(){
