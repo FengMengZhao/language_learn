@@ -1,0 +1,19 @@
+package org.fmz.io;
+
+import java.io.*; 
+
+public class BufferedInputFile{
+    public static String read(String file_name) throws IOException{
+        BufferedReader in = new BufferedReader(new FileReader(file_name));
+        String s;
+        StringBuilder sb = new StringBuilder();
+        while((s = in.readLine()) != null)
+            sb.append(s + "\n");
+        in.close();
+        return sb.toString();
+    }
+
+    public static void main(String args[]) throws IOException{
+        System.out.println(read("io/BufferedInputFile.java"));
+    }
+}

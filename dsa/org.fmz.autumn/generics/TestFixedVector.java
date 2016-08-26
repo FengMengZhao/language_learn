@@ -33,9 +33,9 @@ public class TestFixedVector{
         v2.append(1);
         v2.append(2);
         v2.append(3);
+        v2.append(10);
         v2.append(9);
-        v2.append(9);
-        v2.append(1);
+        v2.append(null);
         v2.append(19);
         v2.append(19);
         v2.append(19);
@@ -43,5 +43,10 @@ public class TestFixedVector{
         System.out.println("foreach output:");
         for(Integer I : v2)
             System.out.print(I + "\t");
+        System.out.println("v2 contains null: " + v2.contains(null));
+        v2.remove(null);
+        for(Integer I : v2)
+            System.out.print(I + "\t");
+        System.out.println("v2 contains null: " + v2.contains(null));
     }
 }
