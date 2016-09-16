@@ -21,11 +21,17 @@ public class Queue<T> extends LinearLinkedContainer<T> {
     public void insertBack(T element){
         if(isEmpty())
             head = tail = new DLNode<T>(element);
+        /*
         else if(head.next == null){
             //System.out.println("I am in...");
             tail = new DLNode<T>(element, head, null);
             head.next = tail;
         }
+        else{
+            tail = new DLNode<T>(element, tail, null);
+            tail.previous.next = tail;
+        }
+        */
         else{
             tail = new DLNode<T>(element, tail, null);
             tail.previous.next = tail;
