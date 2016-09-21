@@ -3,9 +3,9 @@ public class PowerOfTwo_231{
         int tmp =0;
         int count = 0;
         while(tmp > 1){
-            tmp /= 3;
+            tmp /= 2;
             count++;
         }
-        return n == (int)Math.pow(3, tmp);
+        return n == (int)Math.pow(2, tmp);
     }
 }
