@@ -8,10 +8,4 @@ public class MySingleton{
     }
 
     private MySingleton(){}// no client can do: new MySingleton()
-
-    public void doX(){...}
-    public void doY(){...}
-
-    public int getA(){...}
-    public String getB(){...}
 }

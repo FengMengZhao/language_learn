@@ -83,5 +83,4 @@ public class Queue<T> extends LinearLinkedContainer<T> {
             }
         };
     }
-
 }
