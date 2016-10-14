@@ -16,12 +16,13 @@ public class AssociativeArray<K, V>{
 
         if(get(key) == null)
             pairs[index++] = new Object[]{key, value};
-        
-        for(int i = 0; i < index; i++){
-            if(key.equals(pairs[i][0])){
-                V res = (V)pairs[i][1];
-                pairs[i][1] = value;
-                value = res;
+        else{
+            for(int i = 0; i < index; i++){
+                if(key.equals(pairs[i][0])){
+                    V res = (V)pairs[i][1];
+                    pairs[i][1] = value;
+                    value = res;
+                }
             }
         }
         return value;

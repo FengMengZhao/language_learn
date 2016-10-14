@@ -1,13 +1,19 @@
 package org.fmz.concurrency;
 
-public class LifeOff implements Runnable{
+import java.util.concurrent.*;
+
+public class LifeOffCountDownLatch implements Runnable{
     private int count_down = 10;
     private static int count = 0;
     private final int id = count++;
+    private CountDownLatch latch;
 
-    public LifeOff(){}
+    public LifeOffCountDownLatch(CountDownLatch latch){
+        this.latch = latch;
+    }
 
-    public LifeOff(int count_down){
+    public LifeOffCountDownLatch(CountDownLatch latch, int count_down){
+        this(latch);
         this.count_down = count_down;
     }
 
@@ -17,6 +23,11 @@ public class LifeOff implements Runnable{
     }
 
     public void run(){
+        try{
+            latch.await();
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
         while(count_down-- > 0){
             System.out.println(status());
             Thread.yield();
@@ -24,8 +35,7 @@ public class LifeOff implements Runnable{
     }
 
     public static void main(String args[]){
-        for(int i = 0; i < 5; i++)
-            new LifeOff().run();
-        System.out.println("Waiting for LifeOff!");
+        LifeOff lo = new LifeOff();
+        lo.run();
     }
 }
