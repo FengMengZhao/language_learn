@@ -93,6 +93,7 @@
                         instance = new Singleton();
                 }
             }
+            return instance;
         }
     }
 

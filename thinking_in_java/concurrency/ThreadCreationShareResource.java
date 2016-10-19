@@ -1,11 +1,17 @@
 package org.fmz.concurrency;
 
 public class ThreadCreationShareResource implements Runnable{
-    private int tickets = 100;
+    private int tickets = 300;
 
     public void run(){
+        synchronized(this){
+            while(tickets > 0)
+                System.out.println(tickets-- + " is saled by " + Thread.currentThread().getName());
+        }
+        /*
         while(tickets > 0)
             System.out.println(tickets-- + " is saled by " + Thread.currentThread().getName());
+        */
     }
 
     public static void main(String args[]){

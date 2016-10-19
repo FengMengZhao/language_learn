@@ -15,5 +15,9 @@ public class TestInit extends SuperInit{
     public static void main(String args[]){
         new TestInit(3, 4);
     }
+    int a;
+    System.out.println(a);
+    int[] arr = new int[5];
+    System.out.println(arr[0]);
 }
 
