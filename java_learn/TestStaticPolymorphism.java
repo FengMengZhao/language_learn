@@ -15,7 +15,7 @@ public class TestStaticPolymorphism{
     public static void main(String args[]){
         A a = new A();
         test(a);
-        A b = new B();
+        B b = new B();
         test(b);
         A c = new C();
         test(c);

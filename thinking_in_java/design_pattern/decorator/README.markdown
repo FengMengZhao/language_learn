@@ -1,4 +1,4 @@
-### 装饰器(Decorator)
+### 装饰器(Decorator)(Structural)
 
 * Attach additional responsibilities to object dynamically and transparently(run-time)
 

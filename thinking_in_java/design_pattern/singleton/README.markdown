@@ -1,4 +1,4 @@
-### 单例模式(Singleton)
+### 单例模式(Singleton)(creational)
 
 * Allow one instance of given class
 
@@ -22,7 +22,7 @@
 ### 饿汉式[可用]
 
     public class Singleton{
-        private static Singleton instance = new Singleton();
+        private static final Singleton instance = new Singleton();
         private Singleton(){}
         public static Singleton getInstance(){
             return instance;
@@ -107,7 +107,7 @@
         }
 
         public static Singleton getInstance(){
-            return new instance;
+            return instance;
         }
     }
 

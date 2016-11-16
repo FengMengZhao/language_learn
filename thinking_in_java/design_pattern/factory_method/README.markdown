@@ -1,4 +1,4 @@
-### 工厂方法模式(Factory method pattern)
+### 工厂方法模式(Factory method pattern)(Creational)
 
 #### What factory method pattern used for?
 

@@ -1,14 +1,27 @@
 public class TestStatic{
     public static void main(String args[]){
-        StaticB b = new StaticB();
-        System.out.println(b.id);
+        System.out.println(Child.id);
     }
 }
 
-class StaticA{
-    static int id = 10;
+class Super{
+    public static int id = 10;
+    static{
+        id = 10000;
+        System.out.println("Super static init block");
+    }
 }
 
-class StaticB extends StaticA{
-    public int id;
+class Father extends Super{
+    public static int id = 100;
+    static{
+        id = 1000;
+        System.out.println("Father static init block");
+    }
+}
+
+class Child extends Father{
+    static{
+        System.out.println("Child static init block");
+    }
 }

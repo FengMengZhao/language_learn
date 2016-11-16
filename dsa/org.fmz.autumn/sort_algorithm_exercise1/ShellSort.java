@@ -7,7 +7,7 @@ public class ShellSort{
         while(hi < len)
             h = h * 3 + 1;
 
-        while(hi > o){
+        while(hi > 0){
             for(int pos = h; pos < len; pos++){
                 int cursor = pos;
                 while(cursor >= 0){

@@ -1,4 +1,4 @@
-### 组合(Composite)
+### 组合(Composite)(Structural)
 
 * Compose objects into three structures to represent part-whole hierarchies
 

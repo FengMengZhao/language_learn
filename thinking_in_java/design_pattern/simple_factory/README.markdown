@@ -1,4 +1,4 @@
-### 简单的工厂模式(Simple Factory Pattern/Static Factory Method Pattern)
+### 简单的工厂模式(Simple Factory Pattern/Static Factory Method Pattern)(Creational)
 
 ```
 

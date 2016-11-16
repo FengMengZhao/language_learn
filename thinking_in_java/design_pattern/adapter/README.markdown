@@ -1,4 +1,4 @@
-### 适配器(Adapter)
+### 适配器(Adapter)(Structural)
 
 * Convert the interface of a class into another interface client expect
 

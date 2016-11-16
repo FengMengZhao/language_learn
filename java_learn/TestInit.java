@@ -1,23 +1,34 @@
 class SuperInit{
-    int i = 1;
-    int j = 2;
-    SuperInit(int i, int j){
-        System.out.println(this.i);
-        this.i = i;
-        System.out.println(this.i);
-        this.j = j;
+    public SuperInit(){
+        System.out.println("SuperInit");
     }
+
+    {
+        System.out.println("I am SuperInit class");
+    }
+
+    static{
+        System.out.println("static SuperInit");
+    }
+
 }
-public class TestInit extends SuperInit{
-    TestInit(int i, int j){
-        super(i, j);
+class ChildInit extends SuperInit{
+
+    public ChildInit(){
+        System.out.println("ChildInit");
     }
-    public static void main(String args[]){
-        new TestInit(3, 4);
+
+    {
+        System.out.println("I am ChildInit class");
     }
-    int a;
-    System.out.println(a);
-    int[] arr = new int[5];
-    System.out.println(arr[0]);
+
+    static{
+        System.out.println("static ChildInit");
+    }
 }
 
+public class TestInit{
+    public static void main(String args[]){
+        new ChildInit();
+    }
+}

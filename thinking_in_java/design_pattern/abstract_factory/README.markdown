@@ -1,4 +1,4 @@
-### 抽象工厂模式(Abstract Factory)
+### 抽象工厂模式(Abstract Factory)(Creational)
 
 * Interface for creating family of realated objects
 

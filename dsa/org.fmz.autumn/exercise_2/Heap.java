@@ -22,7 +22,7 @@ public abstract class Heap<T extends Comparable<T>> extends ArrayContainer<T>{
     }
 
     public boolean isLeaf(int n){
-        return (n << 1) + 1 < numItems - 1;
+        return (n << 1) + 1 > numItems - 1;
     }
 
     public void insert(T element){
