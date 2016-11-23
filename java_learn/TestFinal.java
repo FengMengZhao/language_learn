@@ -1,7 +1,8 @@
 public class TestFinal{
-    final int a;
 
-    public TestFinal(){
+    static final int a;
+
+    {
         a = 2;
     }
 }
