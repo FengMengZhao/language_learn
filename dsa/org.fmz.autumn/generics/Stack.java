@@ -11,7 +11,7 @@ public class Stack<T> extends LinearLinkedContainer<T>{
             head = new SLNode<T>(element);
         else
             head = new SLNode<T>(element, head);
-        num_items++;
+       num_items++;
 
         //head = new SLNode<T>(element, head);
         

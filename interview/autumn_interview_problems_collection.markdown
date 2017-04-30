@@ -27,7 +27,6 @@
 * string是不可变(immutable/final)的,如何理解?比较stringbuffer  stringBuiler他们之间区别
 
 ```
-
 String is immutable/final generally for two reasons:
 
 1. String objct are cached in String pool. Since cached String literals are shared between multiple clients there is always a risk, where one client's action would affect another client; Caching of String objects is important for performance reason.
@@ -40,7 +39,6 @@ String is immutable/final generally for two reasons:
 
 5. String is immutable, it can safely share between many threads which is very important for multithreaded programming and to avoid any synchronization issue in java. Immutablity also makes String instance thread-safe in java, means you don't need to synchronized String operation externally. 
 
-***
 
 Difference between String StringBuffer and StringBuilder:
 
@@ -52,16 +50,14 @@ So the solutions:
 
 1) If String is not gong to change, use String. 
 
-2) If String is going to change and always for single thread, use StringBuiler for performance
+2) If String is going to change and always for single thread, use StringBuiler for performance.
 
 3) If String is going to change and will be accessed from multiple threads, use a StringBuffer for the thread-safety synchronization
-
 ```
 
 * An immutable class for example?
 
 ```
-
 public final class Student{
     private String name;// this is immutable(private)
 
@@ -73,7 +69,6 @@ public final class Student{
         return name;
     }
 }
-
 ```
 
 * 做过的项目比较有特色的介绍一下
@@ -94,3 +89,27 @@ public final class Student{
 
 * 手写个归并吧(写出来了，但是不流利)
 
+### 2016-09-06
+
+* 什么是多线程，为什么要使用多线程，多线程与多进程的区别
+
+```
+What is thread?
+
+1. A thread is an independent set of values of the processor registers(for a single core). Since this includes the Instruction Pointer(aka Program Counter), which controls what executes in what order. It also includes the Stack Pointer, which had better point to a unique area of memory for each thread or else they will interfere with each other.
+
+2. Threads are the software unit affected by control flow(function call, loop, switch), because those instructions operate on the Instruction Pointer, and that belongs to a paritcular thread. Threads are often scheduled arrording to some prioritization scheme(although it is possible to design a system with one thread per processor core, in which case every thread is always running and no shcheduling is needed).
+
+3. In fact the value of the Instruction Pointer and the instruction stored at that location is sufficient to determine a new value for Instruction Pointer. For most instructions, this simply advances the IP by the size of the instruction, but control flow instructions change the IP in other, predicatable ways. The sequence of values the IP takes on forms a path of execution weaving through the program code, giving rise to the name "thread".
+
+ps: The exact list of CPU registers depends on the architecture, but instruction pointer and stack pointer are pretty much universal. They define a thread insofar as when this thread(set of register values) is loaded in the processor core, the thread is running. The processor is fetching instructions demanded by the thread and updateing the thread registers. When a contex switch is needed, the processor saves this set of register values into memeory and loads a set belonging to defferent thread, typically as part of the interrupt servicing logic.
+
+Why we need multi therad?
+
+1. The main reason, in many applications, multiple activities are going on at once. Some of these may block from time to time. By decomposing such an application into multiple sequential threads that run in quasi-parallel, the programming model becomes simpler.
+
+2. Thread is lighter weight than process, they are easier to creat and destroy than processes, which is about 10-100 times faster than create a process.
+
+3. About performance, threads yield no performance gain when all of them are CPU bound, but when there is a substantial
+computing and substantial I/O, having threads allows these activities to overlap, thus speeding up the application. 
+```
