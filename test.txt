@@ -1,7 +1,3 @@
 fmz
 cll
-<<<<<<< HEAD
 bbb
-=======
-aaa
->>>>>>> 0e0c6b15dfb517f79aca48023df39161414999d0
