@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package org.fmz.util;
 
 import java.util.LinkedHashMap;

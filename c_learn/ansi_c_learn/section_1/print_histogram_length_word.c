@@ -8,7 +8,7 @@ main(){
     printf("Enter the file name: ");
     scanf("%s", fileName);
 
-    fp = fopen("%s", fileName);
+    fp = fopen(fileName, "r");
 
     while((ch = getc(fp)) != EOF){
         if(ch == ' ' || ch == '\t' || ch == '\n'){
