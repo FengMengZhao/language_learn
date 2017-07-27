@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#define MAXWL 25;
-#define MAXNO 20;
+#define MAXWL 25
+#define MAXNO 20
 
 main(){
     FILE *fp;
@@ -14,7 +14,7 @@ main(){
     }
 
     nc = nw = 0;
-    while((ch = getch(fp)) != EOF){
+    while((ch = getc(fp)) != EOF){
         ++nc;
         if(ch == ' ' || ch == '\t' || ch == '\n'){
             wordLen[nw] = nc - 1;
@@ -24,7 +24,12 @@ main(){
     }
 
     for(i = MAXWL; i >= 1; --i){
-
+        for(j = 0; j <= nw; j++){
+            if(i < wordLen[j]){
+                printf("*");
+            }
+            printf(" ");
+        }
+        printf("\n");
     }
-
 }
