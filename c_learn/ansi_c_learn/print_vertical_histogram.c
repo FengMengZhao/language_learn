@@ -7,7 +7,7 @@ main(){
     FILE *fp;
     char fileName[100];
     char wordLen[MAXNO];
-    int i, j, ch, nc, nw;
+    int i, j, ch, nc, nw, printState;
 
     for(i = 0; i < MAXNO; i++) {
         wordLen[i] = 0;
@@ -27,14 +27,23 @@ main(){
         }
     }
 
-    for(i = MAXWL; i >= 1; --i){
-        for(j = 0; j <= nw; ++j){
-            if(i < wordLen[j]){
-                printf("*");
+    printState = 0;
+    for(i = MAXWL; i > 0; --i){
+        for(j = 0; j < nw; ++j){
+            if(printState){
+                if(i <= wordLen[j]){
+                    printf("*");
+                }else{
+                    printf(" ");
+                }
             }else{
-                printf(" ");
+                if((i - 1) <= wordLen[j]){
+                    printState = 1;
+                }
             }
         }
-        printf("\n");
+        if(printState){
+            printf("\n");
+        }
     }
 }
