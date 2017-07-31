@@ -1,10 +1,13 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAXLINESIZE 1000
 
 int getLine(FILE *fp, char line[], int manxLine);
 
 void copy(char to[], char from[]);
+
+void printArray(char *arr);
 
 main(){
 
@@ -26,16 +29,18 @@ main(){
             copy(longest, line);
         }
         if(max > 0){
-            printf("I am in...");
             printf("%s", longest);
         }
     }
+
+    printArray(fileName);
 }
 
 
 int getLine(FILE *fp, char s[], int limit){
     int c, i;
     for(i = 0; i < limit - 1 && (c = getc(fp) != EOF) && c != '\n'; ++i){
+        printf("I am ...");
         s[i] = c;
     }
     if(c == '\n'){
@@ -52,5 +57,12 @@ void copy(char to[], char from[]){
     i = 0;
     while((to[i] = from[i]) != '\0'){
         ++i;
+    }
+}
+
+void printArray(char *arr){
+    int i;
+    for(i = 0; i < strlen(arr); i++){
+        printf("arr[%d] = %c; ", i, arr[i]);
     }
 }
