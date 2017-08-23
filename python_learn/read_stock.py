@@ -10,4 +10,5 @@ for line in open(filename):
     stock = (name, shares, price)
     portfolio.append(stock)
 
-print portfolio[1]
+for pfo in portfolio:
+    print pfo
