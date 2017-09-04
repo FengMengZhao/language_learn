@@ -1,4 +1,4 @@
-package org.fmz.test.reflection;
+package org.fmz.test.reflection.bean;
 
 import java.io.*;
 import java.sql.*;
