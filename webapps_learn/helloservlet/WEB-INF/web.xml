@@ -8,6 +8,7 @@
    <servlet>
       <servlet-name>HelloWorldServlet</servlet-name>
       <servlet-class>org.fmz.servlet.learn.HelloServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
    </servlet>
  
    <!-- Note: All <servlet> elements MUST be grouped together and

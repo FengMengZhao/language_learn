@@ -4,14 +4,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<%!
-    int demvar = 0;
-%>
 </head>
 <body>
-    count is:
-    <%
-        out.println(demvar++);
-    %>
+first
+<% out.println("second"); %>
+<% response.getWriter().println("third"); %>
 </body>
 </html>

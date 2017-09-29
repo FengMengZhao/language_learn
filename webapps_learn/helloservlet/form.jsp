@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+</head>
+<body>
+	<form action="welcome.jsp">  
+	<input type="text" name="username">
+	<input type="submit" value="go"><br/>  
+	</form>
+</body>
+</html>

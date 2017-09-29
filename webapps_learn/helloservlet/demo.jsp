@@ -13,5 +13,11 @@
     <%
         out.println(demvar++);
     %>
+    <%!
+    	public void jspInit(){
+		System.out.println("This is the override jspInit() method!");
+		System.out.println("This is the override jspInit() method!!!");
+	}
+    %>
 </body>
 </html>

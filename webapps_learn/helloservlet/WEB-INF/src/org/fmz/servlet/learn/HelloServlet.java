@@ -5,6 +5,20 @@ import javax.servlet.*;
 import javax.servlet.http.*;
  
 public class HelloServlet extends HttpServlet {
+
+    static {
+        System.out.println("Instantiation static block");
+    }
+    
+    @Override
+    public void init(){
+        System.out.println("##HelloServlet servlet inint.##");
+    }
+
+    public HelloServlet(){
+        System.out.println("Instantiation constructor block");
+    }
+
    @Override
    public void doGet(HttpServletRequest request, HttpServletResponse response)
                throws IOException, ServletException {
