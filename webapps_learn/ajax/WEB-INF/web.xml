@@ -3,22 +3,21 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
  
-  <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml -->
- 
-   <!--
+  <!-- To save as <CATALINA_HOME>\webapps\helloservlet\WEB-INF\web.xml
    <servlet>
-      <servlet-name>HelloWorldServlet</servlet-name>
-      <servlet-class>org.fmz.servlet.learn.HelloServlet</servlet-class>
+      <servlet-name>AjaxServlet</servlet-name>
+      <servlet-class>one.AjaxServlet</servlet-class>
       <load-on-startup>1</load-on-startup>
-   </servlet>
-   -->
+  </servlet>
+  -->
+
  
    <!-- Note: All <servlet> elements MUST be grouped together and
          placed IN FRONT of the <servlet-mapping> elements 
  
    <servlet-mapping>
-      <servlet-name>HelloWorldServlet</servlet-name>
-      <url-pattern>/sayhello</url-pattern>
+      <servlet-name>AjaxServlet</servlet-name>
+      <url-pattern>/servlet/AjaxServlet</url-pattern>
    </servlet-mapping>
-   -->
+-->
 </web-app>

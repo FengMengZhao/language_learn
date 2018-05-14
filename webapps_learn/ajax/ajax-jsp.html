@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax测试</title>
+</head>
+<body>
+<div>
+    <h2>AJAX Test</h2>
+    <input type="text" name="userinput" placeholder="用户输入，Ajax方式获得数据" onblur="getResult(this)">
+    <br>
+    <span id="ajax_result">hello</span>
+    <script>
+    getResult = function(str){
+        var httpxml;
+        if(0 == str.value.length) {
+            document.getElementById("ajax_result").innerHTML = "Nothing";   
+        } 
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        }else{
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function(message){
+            if(4 == xmlhttp.readyState && 200 == xmlhttp.status) {
+                document.getElementById("ajax_result").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","receiveParams.jsp?userinput="+str.value,true);
+        xmlhttp.send();
+
+    }
+    </script>
+</div>
+</body>
+</html>
+

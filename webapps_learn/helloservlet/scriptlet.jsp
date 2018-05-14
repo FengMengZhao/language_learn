@@ -11,13 +11,16 @@
 <body>
     count is:
     <%
-        out.println(demvar++);
+        out.println("globalVariable: " + demvar++);
+        int localDemvar = 0;
+        out.println("localVariable: " + localDemvar++);
     %>
     <%!
     	public void jspInit(){
-		System.out.println("This is the override jspInit() method!");
-		System.out.println("This is the override jspInit() method!!!");
-	}
+            System.out.println("This is the override jspInit() method!");
+            System.out.println("This is the override jspInit() method!!!");
+	    };
     %>
+</body>
 </body>
 </html>

@@ -3,7 +3,9 @@ package org.fmz.servlet.learn;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.servlet.annotation.*;
  
+@WebServlet("/servlet/sayHello")
 public class HelloServlet extends HttpServlet {
 
     static {
@@ -44,6 +46,11 @@ public class HelloServlet extends HttpServlet {
          out.println("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
          out.println("</body>");
          out.println("</html>");
+         out.println("ContestPath: <h3>" + request.getContextPath() + "</h3>");
+         out.println("ServletPah: <h3>" + request.getServletPath() + "</h3>");
+         out.println("PathInfo: <h3>" + request.getPathInfo() + "</h3>");
+         out.println("RequestRUI: <h3>" + request.getRequestURI() + "</h3>");
+         out.println("RealPath: <h3>" + request.getRealPath("/") + "</h3>");
       } finally {
          out.close();  // Always close the output writer
       }

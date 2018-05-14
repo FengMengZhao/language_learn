@@ -370,11 +370,6 @@
 [Loaded java.security.BasicPermissionCollection from /opt/jdk1.7.0_80/jre/lib/rt.jar]
 [Loaded Sample from file:/home/fmz/git_repo/language_learn/java_learn/reflection/]
 [Loaded java.lang.Void from /opt/jdk1.7.0_80/jre/lib/rt.jar]
-[Loaded java.util.Date from /opt/jdk1.7.0_80/jre/lib/rt.jar]
-[Loaded sun.util.calendar.CalendarSystem from /opt/jdk1.7.0_80/jre/lib/rt.jar]
-[Loaded sun.util.calendar.AbstractCalendar from /opt/jdk1.7.0_80/jre/lib/rt.jar]
-[Loaded sun.util.calendar.BaseCalendar from /opt/jdk1.7.0_80/jre/lib/rt.jar]
-[Loaded sun.util.calendar.Gregorian from /opt/jdk1.7.0_80/jre/lib/rt.jar]
 *
 [Loaded java.util.LinkedHashSet from /opt/jdk1.7.0_80/jre/lib/rt.jar]
 *false
