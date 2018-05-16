@@ -121,3 +121,144 @@ JVM保证了线程的安全性，因为静态属性只会在类第一次加载�
     }
 
 > 枚举实现的单例模式，保证了线程安全，而且还能防止反序列化重新创建新的对象
+
+### 单例模式应用
+
+**Java JDK应用单例模式**
+
+`Java JDK`中`java.lang.Runtime`使用了单例模式；一个Java应用仅仅允许有一个运行时的实例和Java运行时环境进行交互，`getRuntime()`方法与`getInstance()`方法相类似。
+
+**单例模式的经典应用场景**
+
+- 硬件资源的访问。例如：打印机的打印池，避免并发访问的问题。
+- 日志。避免并发访问的问题。
+- 配置文件。为了提高性能。
+- 缓存。为了提高性能.
+
+### 单例模式实践
+
+> 需求：一个ATM打印机程序，能够打印不同种类的账单信息(简易版的和明细版的)；要去内存的使用是最小的。
+
+- 设计模式
+    - 工厂模式(Factory Pattern)
+    - 单例模式(Singleton Pattern)
+
+>创建一个`StatementType`的接口，简易版和明细版分别实现接口<br><br>
+工厂模式：客户端和工厂进行交互，完全感觉不到对象的创建。当需要增加新的打印模式(比如信用卡账单打印)，可以新增加一个类`CreditTye`，这样就保证了可扩展性，符合设计模式中开闭原则<br><br>
+单例模式：为了保证内存的占用最小，可以考虑工厂对象的创建采用单例模式
+
+示例代码：
+
+**Factory.java**
+
+    package org.fmz.design_pattern
+
+    public abstract class Factory {
+        protected abstract StatementType createStatements(String selection);
+    }
+
+> 抽象的工厂类。这个类是和客户端进行交互的契约，所有的工厂实现类必须继承这个抽象工厂类
+
+**StatementFactory.java**
+
+    package org.fmz.design_pattern;
+
+    public class StatementFactory extends Factory {
+        private static StatementFactory uniqueInstance;
+        private StatementFactory() {
+        
+        }
+        public static StatementFactory getUniqueInstance() {
+            if (uniqueInstance == null) {
+                uniqueInstance = new StatementFactory();
+                System.out.println("Creating a new StatementFactory instance");
+            
+            }
+            return uniqueInstance;
+        
+        }
+
+        @Override
+        public StatementType createStatements(String selection) {
+            if (selection.equalsIgnoreCase("detailedStmt")) {
+                return new DetailedStatement();
+            
+            } else if (selection.equalsIgnoreCase("miniStmt")) {
+                return new MiniStatement();
+            
+            }
+            throw new IllegalArgumentException("Selection doesnot exist");
+        
+        }
+
+    }
+
+> 工厂的实现类。这是对象创建的主类。
+
+**StatementType.java**
+
+    package org.fmz.design_pattern;
+
+    public interface StatementType {
+        String print()
+    }
+
+> 打印类型的接口。提供不同类型打印方式的抽象。
+
+**DetailedStatement.java**
+
+    package org.fmz.design_pattern;
+
+    public class DetailedStatement implements StatementType {
+        @Override
+            public String print() {
+            System.out.println("Detailed Statement Created");
+            return "detailedStmt";
+        
+            }
+
+    }
+
+> 明细版打印类型的具体实现。
+
+**MiniStatement.java**
+
+    package org.fmz.design_pattern;
+
+    public class MiniStatement implements StatementType {
+        @Override
+            public String print() {
+            System.out.println("Mini Statement Created");
+            return "miniStmt";
+        
+            }
+
+    }
+
+> 简易版打印类型的具体实现。
+
+**Client.java**
+
+    package org.fmz.design_pattern;
+
+    public class Client {
+        public static void main(String[] args) {
+            System.out.println("Enter your selection:");
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String selection = null;
+            try {
+                selection = br.readLine();
+            
+            } catch (IOException e) {
+                e.printStackTrace();
+            
+            }
+            Factory factory = StatementFactory.getUniqueInstance();
+            StatementType objStmtType = factory.createStatements(selection);
+            System.out.println(objStmtType.print());
+        
+        }
+
+    }
+
+> 客户端
